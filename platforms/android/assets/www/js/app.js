@@ -1,32 +1,76 @@
 (function(){
   'use strict';
-  angular.module('sprayApp',['ngRoute','sprayApp.const'])
+  angular.module('sprayApp',['ngMaterial','ngRoute','sprayApp.const'])
   .config(['$routeProvider',function($routeProvider){
     $routeProvider.when('/',{
-      templateUrl:'templates/home.html',
-      controller:'mainCtrlr'
+      templateUrl:'templates/home.html'
     })
   }])
-  .controller('mainCtrlr',['$log','$scope','sConst','$http',function($log,$scope,sConst,$http){
-    var getData = function(payload){
-      $http({
+  .factory('dataHandler',['$http','sConst',function($http,sConst){
+    return  {
+      getFields: function(){
+        console.log('fields');
+        return fetch({'operation':'getFields'});
+      },
+      getChemicals: function(){
+        console.log('chemicals');
+        return true;
+      }
+    }
+    function fetch(payload){
+      return $http({
         method:'POST',
         url: sConst.apiUrl,
         data: payload,
         headers:{
           'Content-Type':'application/x-www-form-urlencoded',
-//          'x-api-key':awsConfig.key
         }
-      }).then(function successCallback(response) {
-        $log.debug(response)
-        return response['data']['Items'];
-      }, function errorCallback(response) {
-        $log.debug('Get Data Error');
-        return false;
       });
+    }
+  }])
+  .controller('mainCtrlr',['$log','$scope','dataHandler','$mdSidenav',function($log,$scope,dataHandler,$mdSidenav){
+    var entryCard = ['entryNew','entryField','entryRecipie','entryWeather','entryComments','entrySubmit'];
+    var recipieCard = [];
+    var fieldCard = [];
+    var reportCard = [];
+    
+    $scope.changeCard = function(card,direction,position){ //entryCard,next,0
+      switch(direction){
+          case'prev':
+          case'left':
+            --position;
+            break;
+          case'next':
+          case'right':
+            ++position;
+      }
+      $scope.pageName = 'partials/'+card[position]+'.html';
     };
-    var payload = {'operation':'getFields'};
-    $scope.fieldList = getData(payload);
+    
+    $scope.toggleLeft = buildToggler('left');
+    $scope.toggleRight = buildToggler('right');
+
+    function buildToggler(componentId) {
+      return function() {
+        $mdSidenav(componentId).toggle();
+      };
+    }
+    
+    dataHandler.getFields().then(function successCallback(response) {
+      $scope.fieldList = JSON.parse(response['data']['body'])['Items'];
+    }, function errorCallback(response) {
+      $scope.fieldList = "Something went wrong.";
+    });
+    
+    $scope.menu = ['Make Recipie','Add Chemical','Add Field','Report','Weather'];
+    
+    $scope.entry = {
+      date:'',
+      field:'',
+      recipie:'',
+      weather:true,
+      comments:''
+    }
     $scope.form = {
       field:'f1',
       task:'t1',

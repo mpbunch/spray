@@ -1,0 +1,33 @@
+<div layout="row">
+  <md-input-container class="flex">
+    <label>Field Name</label>
+    <md-select ng-model="entry.fieldId">
+      <md-option ng-repeat="field in fieldList" ng-value="field.id">
+        {{field.name}}
+      </md-option>
+    </md-select>
+  </md-input-container>
+</div>
+<div layout="row">
+  <md-input-container class="flex">
+    <label>Recipie</label>
+    <md-select ng-model="entry.recipieId">
+      <md-option ng-repeat="field in fieldList" ng-value="field.id">
+        {{recipie.name}}
+      </md-option>
+    </md-select>
+  </md-input-container>
+</div>
+<div layout="row">
+  <md-input-container class="flex">
+    <md-switch class="md-primary" name="weather" ng-model="entry.weather">
+      Attach weather data
+    </md-switch>
+  </md-input-container>
+</div>
+<div layout="row">
+  <md-input-container class="flex">
+    <label>Comments</label>
+    <textarea ng-model="entry.comments" md-maxlength="150" rows="5" md-select-on-focus=""></textarea>
+  </md-input-container>
+</div>

@@ -1,82 +1,16 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <h3>Spray Logger</h3>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <select class="form-control margin-top-10" ng-model="form.field">
-        <option value="f1">Field One</option>
-        <option value="f2">Field Two</option>
-      </select>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <select class="form-control margin-top-10" ng-model="form.task">
-        <option value="t1">Task One</option>
-        <option value="t2">Task Two</option>
-      </select>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <select class="form-control margin-top-10" ng-model="form.carrierRate">
-        <option value="r1">Carrier Rate 1</option>
-        <option value="r2">Carrier Rate 2</option>
-      </select>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <input type="text" class="form-control margin-top-10" ng-model="form.acres">
-    </div>
-  </div>
-  
-  <!--products-->
-  <div class="row">
-    <div class="col-xs-12">
-      <select class="form-control margin-top-10" ng-model="form.p1">
-        <option value="p11">Product One</option>
-        <option value="p12">Product Two</option>
-      </select>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <select class="form-control margin-top-10" ng-model="form.p1Rate">
-        <option value="p11Rate">Rate One</option>
-        <option value="p12Rate">Rate Two</option>
-      </select>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <select class="form-control margin-top-10" ng-model="form.p2">
-        <option value="p21">Product One</option>
-        <option value="p22">Product Two</option>
-      </select>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <select class="form-control margin-top-10" ng-model="form.p2Rate">
-        <option value="p21Rate">Rate One</option>
-        <option value="p22Rate">Rate Two</option>
-      </select>
-    </div>
-  </div>
-  
-  <!--End Products-->
-  <div class="row">
-    <div class="col-xs-12">
-      <textarea class="form-control margin-top-10" ng-model="form.comments"></textarea>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <input type="submit" class="btn btn-primary" ng-click="submitForm()"/>
-    </div>
-  </div>
-</div>
+<md-card>
+  <md-card-title>
+    <md-card-title-text>
+      <div layout="row">
+        <span class="md-headline">+Entry</span>
+        <md-input-container>
+          <label>Spray date</label>
+          <md-datepicker ng-model="entry.date"></md-datepicker>
+        </md-input-container>
+      </div>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-content>
+    <div class="{{cardName}}" ng-include="cardName"></div>
+  </md-card-content>
+</md-card>
