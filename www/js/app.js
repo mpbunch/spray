@@ -43,10 +43,12 @@
     }
   }])
   .controller('mainCtrlr',['$log','$scope','dataHandler','$mdSidenav','$parse',function($log,$scope,dataHandler,$mdSidenav,$parse){
+    
     //Partial Maker .. because i was tired of typing the word partials
     function makePartial(partial){
       return {page:'partials/'+partial+'.html',card:partial};
     }
+    
     //Initial card partial
     $scope.entry    = makePartial('initEntry');
     $scope.recipie  = makePartial('initRecipie');
@@ -76,7 +78,6 @@
       }
       $parse(card).assign($scope,makePartial(eval(card+'Card')[position]));   //Output Example: $scope.entry = 'partials/entryField.html';
     };
-    
     
     //###################################################################################################
     //Handle all promises in controller
@@ -154,6 +155,7 @@
           return 'weather-fog';
       }
     }
+    
     //Convert degrees to cardnial direction
     function getCardinal(angle){
       var directions = 8;
@@ -176,6 +178,7 @@
       if(angle >= 7 * degree && angle < 8 * degree)
         return "NWest";
     }
+    
     //Sort returnd dynamo responses by ID
     //PROBLEM:
     //Item in items | orderBy:'id' track by $index
@@ -187,6 +190,7 @@
     function alphaOrder(objs){
       return objs.sort(function(a,b){return a.id - b.id});
     }
+    
     //dont have a clean solution for adding weather info to entryForm
     $scope.attachWeather = function(){
       $log.debug($scope.entryForm.weather.attach);
@@ -213,6 +217,7 @@
       $log.debug('Clean: ',form);
       return form;
     }
+    
     //Probably going to get rid of the menu
     $scope.menu = ['Make Recipie','Add Chemical','Add Field','Report','Weather'];
     $scope.toggleLeft = buildToggler('left');
