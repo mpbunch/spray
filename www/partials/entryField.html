@@ -1,0 +1,35 @@
+<md-card-content>
+  <div layout="row">
+    <md-input-container class="flex">
+<!--      <label>Select Field</label>-->
+      <md-select ng-model="entryForm.field" placeholder="Select Field">
+        <md-option><em>None</em></md-option>
+        <md-option ng-repeat="field in fieldList" ng-value="field">
+          <span>{{field.location}}</span>
+          <span><label>Number: {{field.number}}</label></span>
+          <span><label>Acres: {{field.acres}}</label></span>
+        </md-option>
+      </md-select>      
+    </md-input-container>
+  </div>
+  <div layout="row" class="card-options">
+    <div ng-if="entryForm.field.id">
+      <span><label>Field Inormation</label></span>
+      <span><label>Number: </label>{{fieldList[entryForm.field.id-1].number}}</span>
+      <span><label>Acres: </label>{{fieldList[entryForm.field.id-1].acres}}</span>
+      <span ng-if="fieldList[entryForm.field.id-1].comment"><label>Comment: </label>{{fieldList[entryForm.field.id-1].comment}}</span>
+    </div>
+  </div>
+</md-card-content>
+<md-card-content class="card-button-content">
+  <div class="md-toolbar-tools card-buttons">
+    <button class="md-icon-button md-button md-ink-ripple" type="button" aria-label="Previous Page" ng-click="changeCard('entry','prev')">
+      <i class="material-icons ng-scope">keyboard_arrow_left</i>
+    </button>
+    <h3 flex="" md-truncate="" class="md-truncate flex card-button-text">Prev</h3>
+    <h3 flex="" md-truncate="" class="md-truncate flex card-button-text">Next</h3>
+    <button class="md-icon-button md-button md-ink-ripple" type="button" aria-label="Next Page" ng-click="changeCard('entry')">
+      <i class="material-icons ng-scope">keyboard_arrow_right</i>
+    </button>
+  </div>
+</md-card-content>

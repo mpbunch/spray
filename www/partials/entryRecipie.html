@@ -1,0 +1,32 @@
+<md-card-content>
+  <div layout="row">
+    <md-input-container class="flex">
+<!--      <label>Select Recipie</label>-->
+      <md-select ng-model="entryForm.recipie" placeholder="Select Recipie">
+        <md-option><em>None</em></md-option>
+        <md-option ng-repeat="recipie in recipieList" ng-value="recipie">
+          <span>{{recipie.name}}</span>
+        </md-option>
+      </md-select>
+    </md-input-container>
+  </div>
+  <div layout="row" class="card-options">
+    <div ng-if="entryForm.recipie.id">
+      <span><label>{{recipieList[entryForm.recipie.id-1].name}}</label></span>
+      <span><label>Chemical<span class="chemicals-s" ng-if="recipieList[entryForm.recipie.id-1].chemicals.length > 1">s</span>:</label></span>
+      <span class="chemical-list" ng-repeat="chemical in recipieList[entryForm.recipie.id-1].chemicals">{{chemical.name}} @ {{chemical.rate}}</span>
+    </div>
+  </div>
+</md-card-content>
+<md-card-content class="card-button-content">  
+  <div class="md-toolbar-tools card-buttons">
+    <button class="md-icon-button md-button md-ink-ripple" type="button" aria-label="Previous Page" ng-click="changeCard('entry','prev')">
+      <i class="material-icons ng-scope">keyboard_arrow_left</i>
+    </button>
+    <h3 flex="" md-truncate="" class="md-truncate flex card-button-text">Prev</h3>
+    <h3 flex="" md-truncate="" class="md-truncate flex card-button-text">Next</h3>
+    <button class="md-icon-button md-button md-ink-ripple" type="button" aria-label="Next Page" ng-click="changeCard('entry')">
+      <i class="material-icons ng-scope">keyboard_arrow_right</i>
+    </button>
+  </div>
+</md-card-content>

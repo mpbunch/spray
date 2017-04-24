@@ -1,0 +1,34 @@
+<md-card-content>
+  <div layout="row">
+    <md-input-container class="flex">
+      <md-switch class="md-primary" name="weather" ng-model="entryForm.weather.attach" ng-click="attachWeather()">
+        Attach weather data
+      </md-switch>
+    </md-input-container>
+  </div>
+  <div layout="row">
+    <span class="weather-icon"><i class="mdi mdi-{{weather.details.icon}}"></i></span>
+    <span class="weather-temp">{{weather.temp}}</span>
+  </div>
+  <div layout="row">
+    <span class="weather-description">{{weather.details.description}}</span>
+  </div>
+  <div layout="row" class="weather-options">
+    <span class="weather-speed"><label>Wind Speed </label>{{weather.wind.speed}} MPH </span>
+    <span class="weather-deg" ng-if="weather.wind.deg"><label>Wind Direction </label>{{weather.wind.deg}}</span>
+<!--    <span class="weather-gust" ng-if="weather.wind.gust"><label>Gust </label>{{weather.wind.gust}}</span>-->
+    <span class="weather-humidity"><label>Humidity </label>{{weather.humidity}}</span>
+  </div>
+</md-card-content>
+<md-card-content class="card-button-content">
+  <div class="md-toolbar-tools card-buttons">
+    <button class="md-icon-button md-button md-ink-ripple" type="button" aria-label="Previous Page" ng-click="changeCard('entry','prev')">
+      <i class="material-icons ng-scope">keyboard_arrow_left</i>
+    </button>
+    <h3 flex="" md-truncate="" class="md-truncate flex card-button-text">Prev</h3>
+    <h3 flex="" md-truncate="" class="md-truncate flex card-button-text">Next</h3>
+    <button class="md-icon-button md-button md-ink-ripple" type="button" aria-label="Next Page" ng-click="changeCard('entry')">
+      <i class="material-icons ng-scope">keyboard_arrow_right</i>
+    </button>
+  </div>
+</md-card-content>
