@@ -22,6 +22,9 @@
       },
       getCoords: function(){
         return get(sConst.coordsUrl);
+      },
+      putData: function(payload){
+        return post({'operation':'putData','payload':payload})
       }
     }
     function get(url){
@@ -115,8 +118,8 @@
         $scope.weather.wind = response.data.wind;
         $scope.weather.wind.deg = getCardinal($scope.weather.wind.deg);
         $scope.weather.humidity = response.data.main.humidity;
-        //add weather to entryForm by default
-        $scope.entryForm.weather = $scope.weather;
+        $scope.entryForm.weather = $scope.weather;//add weather to entryForm by default
+        $scope.entryForm.weather.attach = true;   //turn on weather attach
         $log.debug($scope.weather);
       });
     });
@@ -197,10 +200,19 @@
     }
     
     //Submit forms
+    //Remove any null or empty values, dynamo will crash and burn if you dont
     $scope.submitForm = function(form){
-      $log.debug('submit: ',$scope[form+'Form']);
+      dataHandler.putData(scrubForm($scope[form+'Form'])).then(function successCallback(response){
+        $log.debug('Submit: ',response);
+      });
     }
     
+    //Remove null, empty values from object
+    function scrubForm(form){
+      Object.keys(form).forEach(k => (!form[k] && form[k] !== undefined) && delete form[k]);
+      $log.debug('Clean: ',form);
+      return form;
+    }
     //Probably going to get rid of the menu
     $scope.menu = ['Make Recipie','Add Chemical','Add Field','Report','Weather'];
     $scope.toggleLeft = buildToggler('left');
@@ -214,7 +226,6 @@
     //Default entryForm
     //Weather switch set to on by default
     $scope.entryForm = {
-      date:'',
       field:{},
       recipie:{},
       weather:{attach:true},
