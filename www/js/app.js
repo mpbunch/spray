@@ -43,26 +43,25 @@
     }
   }])
   .controller('mainCtrlr',['$log','$scope','dataHandler','$mdSidenav','$parse',function($log,$scope,dataHandler,$mdSidenav,$parse){
-    
     //Partial Maker .. because i was tired of typing the word partials
     function makePartial(partial){
       return {page:'partials/'+partial+'.html',card:partial};
     }
-    
+
     //Initial card partial
     $scope.entry    = makePartial('initEntry');
     $scope.recipie  = makePartial('initRecipie');
     $scope.field    = makePartial('initField');
     $scope.chemical = makePartial('initChemical');
     $scope.report   = makePartial('initReport');
-    
+
     //Order of cards; change this order to change UI order
     var entryCard     = ['initEntry','entryField','entryRecipie','entryWeather','entryComments','entrySubmit'];
     var recipieCard   = ['initRecipie','recipieTitle','recipieChemical','recipieComments','recipieSubmit'];
     var fieldCard     = ['initField','fieldTitle','fieldComments','fieldSubmit'];
     var chemicalCard  = ['initChemical','chemicalTitle','chemicalComments','chemicalSubmit'];
     var reportCard    = ['initReport','reportFields','reportChemicals','reportWeather','reportActivity'];
-    
+
     //Find 'next' card .. even if next card is the previous card
     $scope.changeCard = function(card,direction = 'next'){                    //changeCard('entry','prev') || changeCard('entry')
       var position = eval(card+'Card').indexOf($scope[card].card);
@@ -78,7 +77,7 @@
       }
       $parse(card).assign($scope,makePartial(eval(card+'Card')[position]));   //Output Example: $scope.entry = 'partials/entryField.html';
     };
-    
+
     //###################################################################################################
     //Handle all promises in controller
     //Why? B/c you have access to the scope variable here, you dont need to mess with $scope.$apply()
@@ -90,7 +89,7 @@
     }, function errorCallback(response) {
       $scope.fieldList = "Something went wrong.";
     });
-    
+
     //Get Chemicals
     dataHandler.getChemicals().then(function successCallback(response) {
       $scope.chemicalList = alphaOrder(JSON.parse(response['data']['body'])['Items']);
@@ -98,7 +97,7 @@
     }, function errorCallback(response) {
       $scope.chemicalList = "Something went wrong.";
     });
-    
+
     //Get Recipies
     dataHandler.getRecipies().then(function successCallback(response) {
       $scope.recipieList = alphaOrder(JSON.parse(response['data']['body'])['Items']);
@@ -106,7 +105,7 @@
     }, function errorCallback(response) {
       $scope.recipieList = "Something went wrong.";
     });
-    
+
     //Get Weather via Coords
     dataHandler.getCoords().then(function successCallback(response){
       $scope.location = response.data;
@@ -124,7 +123,7 @@
         $log.debug($scope.weather);
       });
     });
-    
+
     //Convert junky openweathermap icons to material icons
     function convertIcons(icon){
       switch(icon){
@@ -155,7 +154,7 @@
           return 'weather-fog';
       }
     }
-    
+
     //Convert degrees to cardnial direction
     function getCardinal(angle){
       var directions = 8;
@@ -178,7 +177,7 @@
       if(angle >= 7 * degree && angle < 8 * degree)
         return "NWest";
     }
-    
+
     //Sort returnd dynamo responses by ID
     //PROBLEM:
     //Item in items | orderBy:'id' track by $index
@@ -190,7 +189,7 @@
     function alphaOrder(objs){
       return objs.sort(function(a,b){return a.id - b.id});
     }
-    
+
     //dont have a clean solution for adding weather info to entryForm
     $scope.attachWeather = function(){
       $log.debug($scope.entryForm.weather.attach);
@@ -202,7 +201,7 @@
         $scope.entryForm.weather.attach = true;
       }
     }
-    
+
     //Submit forms
     //Remove any null or empty values, dynamo will crash and burn if you dont
     $scope.submitForm = function(form){
@@ -210,14 +209,14 @@
         $log.debug('Submit: ',response);
       });
     }
-    
+
     //Remove null, empty values from object
     function scrubForm(form){
       Object.keys(form).forEach(k => (!form[k] && form[k] !== undefined) && delete form[k]);
       $log.debug('Clean: ',form);
       return form;
     }
-    
+
     //Probably going to get rid of the menu
     $scope.menu = ['Make Recipie','Add Chemical','Add Field','Report','Weather'];
     $scope.toggleLeft = buildToggler('left');
@@ -227,7 +226,7 @@
         $mdSidenav(componentId).toggle();
       };
     }
-    
+
     //Default entryForm
     //Weather switch set to on by default
     $scope.entryForm = {
