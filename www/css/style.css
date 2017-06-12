@@ -36,14 +36,16 @@
 }
 .card-buttons>button {
   color: #666;
+  height: 50px !important;
+  padding-top: 15px !important;
 }
 .card-buttons>h3:nth-of-type(2) {
     text-align: right;
 }
 md-card>md-card-title,
 md-card>md-card-content:first-child{
-  min-height:100px;
-  padding: 5px 15px;
+  min-height:175px;
+  padding: 20px 15px 5px;
   background-color: #ededed;
 }
 md-card md-input-container {
@@ -53,10 +55,12 @@ md-card md-input-container {
 md-option span:nth-of-type(1n+2) {
   font-size: 8px;
 }
+/*
 md-option span:first-child {
   display: block;
   margin-bottom: -8px;
 }
+*/
 md-card-content .card-options span:first-child {
   font-weight: bold;
   margin-top: 10px;

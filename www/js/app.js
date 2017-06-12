@@ -235,5 +235,11 @@
       weather:{attach:true},
       comment:''
     };
+    //Default recipieForm
+    $scope.recipieForm = {
+      name:'',
+      chemicals:{},
+      comment:''
+    };
   }])
 })();

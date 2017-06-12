@@ -1,0 +1,19 @@
+<md-card-content>
+  <div layout="row">
+    <md-input-container class="flex">
+      <input type="text" placeholder="Recipie Comment" ng-model="recipie.comment"/>
+    </md-input-container>
+  </div>
+</md-card-content>
+<md-card-content class="card-button-content">
+  <div class="md-toolbar-tools card-buttons">
+    <button class="md-icon-button md-button md-ink-ripple" type="button" aria-label="Previous Page" ng-click="changeCard('recipie','prev')">
+      <i class="material-icons ng-scope">keyboard_arrow_left</i>
+    </button>
+    <h3 flex="" md-truncate="" class="md-truncate flex card-button-text">Prev</h3>
+    <h3 flex="" md-truncate="" class="md-truncate flex card-button-text">Next</h3>
+    <button class="md-icon-button md-button md-ink-ripple" type="button" aria-label="Next Page" ng-click="changeCard('recipie')">
+      <i class="material-icons ng-scope">keyboard_arrow_right</i>
+    </button>
+  </div>
+</md-card-content>
