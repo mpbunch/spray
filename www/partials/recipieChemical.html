@@ -1,7 +1,17 @@
 <md-card-content>
   <div layout="row">
     <md-input-container class="flex">
-      <input type="text" placeholder="Recipie Chemical" ng-model="recipieForm.chemical"/>
+      <md-select ng-model="recipieForm.chemicals[0]" placeholder="Select Chemical">
+        <md-option><em>None</em></md-option>
+        <md-option ng-repeat="chemical in chemicalList" ng-value="chemical">
+          <span>{{chemical.chemical}}</span>
+        </md-option>
+      </md-select>
+    </md-input-container>
+  </div>
+  <div layout="row">
+    <md-input-container class="flex">
+      <input type="text" placeholder="Rate" ng-model="recipieForm.chemicals[0].rate"/>
     </md-input-container>
   </div>
 </md-card-content>

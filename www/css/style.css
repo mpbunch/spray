@@ -49,8 +49,11 @@ md-card>md-card-content:first-child{
   background-color: #ededed;
 }
 md-card md-input-container {
-  margin: 0;
+  margin: 10px 0;
   padding: 0;
+}
+md-card md-card-content:first-child md-input-container{
+  margin-top:0
 }
 md-option span:nth-of-type(1n+2) {
   font-size: 8px;
@@ -130,4 +133,40 @@ md-card-content .card-options span {
 }
 .mdi-weather-fog{
   color:slateblue;
+}
+
+
+
+/*report*/
+.reportEntryLocation{
+  width:50%;
+}
+.reportEntryDate{
+  font-size: 10px;
+  text-align: right;
+  width:50%;
+}
+.reportEntryRecipieTitle,
+.reportEntryWeather{
+  font-size:14px;
+}
+.reportEntryRecipieChemicals{
+  font-size: 12px;
+  margin-left: 10px;
+}
+.reportEntryWeather,
+.reportEntryRecipie{
+  width:50%;
+}
+.reportEntryWeather span {
+  display: block;
+  font-size: 10px;
+  text-align: right;
+}
+.reportEntry:first-child{
+  padding-bottom:10px;
+}
+.reportEntry:nth-of-type(1n+2) {
+    padding: 10px 0;
+    border-top: solid 1px #ddd;
 }

@@ -11,9 +11,9 @@
   </div>
   <div layout="row" class="card-options">
     <div ng-if="entryForm.recipie.id">
-      <span><label>{{recipieList[entryForm.recipie.id-1].name}}</label></span>
-      <span><label>Chemical<span class="chemicals-s" ng-if="recipieList[entryForm.recipie.id-1].chemicals.length > 1">s</span>:</label></span>
-      <span class="chemical-list" ng-repeat="chemical in recipieList[entryForm.recipie.id-1].chemicals">{{chemical.name}} @ {{chemical.rate}}</span>
+      <span><label>{{getRecipieName(entryForm.recipie.id)}}</label></span>
+      <span><label>Chemical<span class="chemicals-s" ng-if="getRecipieChemicals(entryForm.recipie.id).length > 1">s</span>:</label></span>
+      <span class="chemical-list" ng-repeat="chemical in getRecipieChemicals(entryForm.recipie.id)">{{chemical.chemical}} @ {{chemical.rate}}</span>
     </div>
   </div>
 </md-card-content>

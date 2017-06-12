@@ -1,0 +1,29 @@
+<md-card-content>
+  <div ng-repeat="data in dataList" class="reportEntry">
+    <div layout="row" class="reportEntryTitle">
+      <div class="reportEntryLocation">{{data.field.location}}</div>
+      <div class="reportEntryDate">{{data.date * 1000 | date:'MM/dd h:mm a'}}</div>
+    </div>
+    <div layout="row" class="reportEntryDetails">
+      <div class="reportEntryRecipie">
+        <div class="reportEntryRecipieTitle">Recipie: {{data.recipie.name}}</div>
+        <div class="reportEntryRecipieChemicals" ng-repeat="chemical in data.recipie.chemicals">
+          <div class="reportEntryRecipieChemical">{{chemical.chemical}} @ {{chemical.rate}}</div>
+        </div>
+      </div>
+      <div class="reportEntryWeather">
+        <span>Temp: {{data.weather.temp}}</span>
+        <span>Wind: {{data.weather.wind.speed}}</span>
+        <span>Humidity: {{data.weather.humidity}}%</span>
+      </div>
+    </div>
+  </div>
+</md-card-content>
+<md-card-content class="card-button-content">
+  <div class="md-toolbar-tools card-buttons">
+    <button class="md-icon-button md-button md-ink-ripple" type="button" aria-label="Previous Page" ng-click="changeCard('report','prev')">
+      <i class="material-icons ng-scope">keyboard_arrow_left</i>
+    </button>
+    <h3 flex="" md-truncate="" class="md-truncate flex card-button-text">Prev</h3>
+  </div>
+</md-card-content>
